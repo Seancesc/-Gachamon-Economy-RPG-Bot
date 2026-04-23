@@ -58,33 +58,6 @@ Gachamon Economy RPG is a Discord bot where users can roll gacha to obtain creat
 
 ---
 
-## 📂 Project Structure
-
-```id="3m6y3g"
-project/
-│
-├── main.py
-├── database.db
-│
-├── cogs/
-│   ├── economy.py
-│   ├── gacha.py
-│   ├── inventory.py
-│   ├── battle.py
-│   ├── gamble.py
-│
-├── data/
-│   ├── pets_data.py
-│   ├── items_data.py
-│
-├── utils/
-│   ├── db.py
-│   ├── gacha_logic.py
-│   ├── battle_logic.py
-```
-
----
-
 ## 🗄️ Database
 
 Uses SQLite with main tables:
@@ -100,13 +73,13 @@ Uses SQLite with main tables:
 
 1. Install dependencies:
 
-```id="5vfbj2"
+```
 pip install discord.py
 ```
 
 2. Run the bot:
 
-```id="gyd2y1"
+```
 python main.py
 ```
 
@@ -159,3 +132,4 @@ SQLite is recommended for data storage as it is more stable than JSON for larger
 ## 👤 Author
 
 This project is created for learning and developing a game-based Discord bot.
+

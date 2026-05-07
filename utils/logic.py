@@ -1,3 +1,5 @@
+# ================= utils/logic.py =================
+
 import random
 
 # ================= PET DATA =================
@@ -54,42 +56,55 @@ def get_emoji(rarity):
 def get_price(rarity):
     return rarity_price.get(rarity, 50)
 
-# ================= GACHA (WEIGHTED) =================
+# ================= WEIGHTED =================
 def weighted_choice(data):
+
     total = sum(x[2] for x in data)
+
     r = random.randint(1, total)
+
     upto = 0
+
     for item in data:
+
         if upto + item[2] >= r:
             return item
+
         upto += item[2]
 
+# ================= ROLL =================
 def roll_pet():
     return weighted_choice(pets_data)
 
 def roll_item():
     return weighted_choice(items_data)
 
-# ================= GAMBLE =================
+# ================= COINFLIP =================
 def coin_flip():
     return random.choice(["heads", "tails"])
 
+# ================= SLOT =================
 slot_symbols = ["🍒", "🍋", "🔔", "💎", "7️⃣"]
 
 def spin_slot():
     return [random.choice(slot_symbols) for _ in range(3)]
 
 def check_jackpot(result, bet):
+
     a, b, c = result
+
     if a == b == c:
         return bet * 5, "🔥 JACKPOT x5"
+
     elif a == b or b == c or a == c:
         return bet * 2, "✨ Win x2"
+
     else:
         return -bet, "❌ Lose"
 
-# ================= LEVEL =================
+# ================= EXP =================
 def add_exp(level, exp, gained):
+
     exp += gained
     leveled = False
 
@@ -104,24 +119,41 @@ def add_exp(level, exp, gained):
 evolution_map = {
     "Anjing": ("Serigala", 5),
     "Serigala": ("Singa", 10),
+
     "Kucing": ("Harimau", 5),
     "Harimau": ("Naga", 15),
 }
 
 def check_evolution(name, level):
+
     if name in evolution_map:
+
         evo, req = evolution_map[name]
+
         if level >= req:
             return evo
+
     return None
 
 # ================= BATTLE =================
 def calculate_win_chance(player, enemy):
+
     chance = 50 + (player - enemy) * 5
+
     return max(20, min(80, chance))
 
 def do_battle(player_level):
-    enemy = random.randint(max(1, player_level-2), player_level+2)
-    chance = calculate_win_chance(player_level, enemy)
+
+    enemy = random.randint(
+        max(1, player_level - 2),
+        player_level + 2
+    )
+
+    chance = calculate_win_chance(
+        player_level,
+        enemy
+    )
+
     roll = random.randint(1, 100)
+
     return roll <= chance, enemy, chance
